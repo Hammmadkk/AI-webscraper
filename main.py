@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from scrapper import chat,web_database
 
 app = FastAPI(
+    docs_url="/"
     title="Chatbot API",
     description="A simple chatbot API",
     version="0.1"
@@ -28,3 +29,4 @@ def scrape_data(email:str,link:str):
 def handle_question(email:str,question:str):
     response = chat(email,question)
     return JSONResponse(content={"response": response})
+

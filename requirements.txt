@@ -6,4 +6,4 @@ python-dotenv
 beautifulsoup4
 fastapi
 uvicorn
-beautifulsoup4
+pymongo
