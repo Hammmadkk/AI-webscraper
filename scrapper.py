@@ -5,7 +5,7 @@ from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-
+from datetime import datetime
 load_dotenv()
 
 # MongoDB Configuration
@@ -49,7 +49,7 @@ model = ChatOpenAI(model='gpt-4o-mini')
 
 def chat(user_id, question):
     # Retrieve user chat history from MongoDB
-    chat_history = collection.find({"user_id": user_id}).sort("_id", -1)
+    chat_history = collection.find({"user_id": user_id}).sort("timestamp", 1)
 
     for chat in chat_history:
         if chat["role"] == "assistant":
@@ -66,7 +66,7 @@ def chat(user_id, question):
     response = model.invoke(messages).content
 
     # Store the user's question and model's response in MongoDB
-    collection.insert_one({"user_id": user_id, "role": "user", "content": question})
-    collection.insert_one({"user_id": user_id, "role": "assistant", "content": response})
+    collection.insert_one({"user_id": user_id, "role": "user", "content": question,"timestamp": datetime.now()})
+    collection.insert_one({"user_id": user_id, "role": "assistant", "content": response,"timestamp": datetime.now()})
 
     return response
