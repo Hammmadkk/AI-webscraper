@@ -35,7 +35,8 @@ def web_database(user_id, link):
     scrapped_data = {
         "user_id": user_id,
         "role": "system",
-        "content": f"Scrapped data for {link}\n\nDATA:\n{content}"
+        "content": f"Scrapped data for {link}\n\nDATA:\n{content}",
+        "timestamp": datetime.now()
     }
     collection.insert_one(scrapped_data)
 
