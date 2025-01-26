@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from scrapper import chat,web_database
 
 app = FastAPI(
-    docs_url="/"
+    docs_url="/",
     title="Chatbot API",
     description="A simple chatbot API",
     version="0.1"
